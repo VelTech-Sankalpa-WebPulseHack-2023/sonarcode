@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #86e1d8;
+}
+.container {
+width: 400px;
+margin: 0 auto;
+padding: 20px;
+background-color: #f0f4f5;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+text-align: center;
+color: #1bd61e;
+margin-top: 0;
+}
+p {
+text-align: center;
+color: #777;
+margin-bottom: 20px;
+}
+label {
+display: block;
+margin-bottom: 10px;
+color: #333;
+}
+input[type="text"],
+input[type="password"] {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+hr {
+margin-top: 20px;
+margin-bottom: 20px;
+border: 0;
+border-top: 1px solid #0de918;
+}
+a {
+color: #337ab7;
+text-decoration: none;
+}
+button[type="submit"] {
+display: block;
+width: 100%;
+padding: 10px;
+margin-top: 20px;
+background-color: #4CAF50;
+color: #fff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-weight: bold;
+}
+button[type="submit"]:hover {
+background-color: #45a049;
+}
+.container.signin {
+text-align: center;
+color: #777;
+}
+</style>
+
+<script>
+  function validateForm() {
+   var eventName = document.forms["registrationForm"]["event-name"].value;
+   var eventDate = document.forms["registrationForm"]["event-date"].value;
+   var eventTime = document.forms["registrationForm"]["event-time"].value;
+   var eventLocation = document.forms["registrationForm"]["event-location"].value;
+   var eventDescription = document.forms["registrationForm"]["event-description"].value;
+  
+   if (eventName == "" || eventDate == "" || eventTime == "" || eventLocation == "" || eventDescription == "") {
+      alert("Please fill in all the required fields.");
+      return false;
+   }
+  
+   var today = new Date();
+   var eventDateObj = new Date(eventDate);
+  
+   if (eventDateObj < today) {
+      alert("Please select a valid date.");
+      return false;
+   }
+  
+   var eventTimeObj = new Date("1970-01-01T" + eventTime);
+   var currentTimeObj = new Date("1970-01-01T" + today.toTimeString().split(' ')[0]);
+  
+   if (eventTimeObj < currentTimeObj) {
+      alert("Please select a valid time.");
+      return false;
+   }
+  
+   return true;
+  }
+  </script>
+
+</head>
+<body>
+  
+    <form id="registrationForm" onsubmit="return validateForm()" novalidate>
+    
+<div class="container">
+<h1>Create Event</h1>
+<p>Please fill in the details to create an event.</p>
+<hr>
+<label for="event-name">Event Name:</label>
+          <input type="text" id="event-name" name="event-name" required>
+          <label for="event-date">Event Date:</label>
+          <input type="date" id="event-date" name="event-date" required>
+          <label for="event-time">Event Time:</label>
+          <input type="time" id="event-time" name="event-time" required>
+          <label for="event-location">Event venue:</label>
+          <input type="text" id="event-location" name="event-location" required>
+          <label for="event-description">Event Description:</label>
+          <textarea id="event-description" name="event-description" required></textarea>
+
+          <button type="submit">Create Event</button>
+
+
+</div>
+</form>
+
+</body>
+</html>
